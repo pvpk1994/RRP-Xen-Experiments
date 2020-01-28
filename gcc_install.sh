@@ -38,5 +38,3 @@ else
 		gcc -v
 	fi
 fi
-
-
