@@ -28,7 +28,7 @@ while 1:
     random_req = random.choice(list_file_sizes)
     print(f'random file-size request size: {random_req}')
     PARAMS = {'random_request': random_req}
-    result = requests.get(url='http://localhost/hhtp_server.php',
+    result = requests.get(url='http://localhost/http_server.php',
                           params=PARAMS)
     print(f"result: {result.url}")
     # If status code is 200 -> OK | elif 404! NOT OK | elif 301! Resource Moved Permanently
