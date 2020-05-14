@@ -11,6 +11,20 @@ num_one_kb_files = 10
 num_100_kb_files = 5
 num_1_mb_files = 3
 
+
+# Paths - Directory creations
+def_path = "/Library/WebServer/Documents/tmpfs/"
+path_1_kb = os.path.join(def_path,"one_kb")
+print(f"path is {path_1_kb}")
+os.mkdir(path_1_kb)
+
+path_100_kb = os.path.join(def_path,"hun_kb")
+os.mkdir(path_100_kb)
+
+path_1_mb = os.path.join(def_path,"one_mb")
+os.mkdir(path_1_mb)
+
+
 # Generate english alphabets
 letters = np.array(list(chr(ord('a')+i) for i in range(0, 26)));
 # print(letters)
@@ -24,7 +38,7 @@ def get_rand_text(file_size):
 
 # 1KB files creation
 for iter in range(0, num_one_kb_files):
-    f = open("./tmpfs/one_kb_"+str(iter)+".txt", "wb")
+    f = open("./tmpfs/one_kb/"+str(iter)+".txt", "wb")
     # specify file size
     f.write(get_rand_text(1000))
     f.close()
@@ -32,7 +46,7 @@ for iter in range(0, num_one_kb_files):
 
 # 100 KB files creation
 for iter in range(0, num_100_kb_files):
-    f = open("./tmpfs/hundred_kb_"+str(iter)+".txt", "wb")
+    f = open("./tmpfs/hun_kb/"+str(iter)+".txt", "wb")
     # specify file size
     f.write(get_rand_text(100000))
     f.close()
@@ -40,7 +54,7 @@ for iter in range(0, num_100_kb_files):
 
 # 1MB files creation
 for iter in range(0, num_1_mb_files):
-    f = open("./tmpfs/one_mb_"+str(iter)+".txt", "wb")
+    f = open("./tmpfs/one_mb/"+str(iter)+".txt", "wb")
     # specify file size
     f.write(get_rand_text(1000000))
     f.close()
