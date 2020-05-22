@@ -7,7 +7,11 @@ import re
 import csv
 import os.path
 
-csv_file_result = "wrk_result.csv"
+csv_file_result = "rtds_one_mb.csv"
+
+# PATHS
+base_path = '/root/torch/wrk2/results/one_mb/'
+file_format = 'txt'
 
 
 def get_time_unit(time_str):
@@ -21,16 +25,16 @@ def get_time_unit(time_str):
 
     # Suffix comparisons: return all the measurements in (ms) only.
     if suffix == 'us':  # micro seconds
-        return prefix/1000
+        return prefix / 1000
     elif suffix == 'ms':  # milli seconds
         return prefix
     elif suffix == 's':  # seconds
-        return prefix*1000
+        return prefix * 1000
     elif suffix == 'm':  # minutes
-        return prefix*1000*60
+        return prefix * 1000 * 60
     elif suffix == 'h':  # hours
-        return prefix*1000*60*60
-    else: # If nothing specified, treat it as ms
+        return prefix * 1000 * 60 * 60
+    else:  # If nothing specified, treat it as ms
         return prefix
 
 
@@ -80,10 +84,19 @@ def csv_ready(wrk_dictionary: dict):
         writer = csv.DictWriter(csv_file, delimiter=',', lineterminator='\n',
                                 fieldnames=headers)
         if is_file_empty:
-            writer.writeheader() # If no such file exists already, then write header
-        values_list = []
-        for value in wrk_dictionary.values():
-            values_list.append(value)
+            writer.writeheader()  # If no such file exists already, then write header
+
+        values_list = [None] * 5  # As we know the length of this list to be 5
+        counter = 0
+
+        for key, value in wrk_dictionary.items():
+            # values_list.append(value)
+            if key in headers:
+                # Get the index of headers[key]
+                get_index = headers.index(key)
+                # Use this index to load values_list
+                values_list[get_index] = value
+
         print(values_list)
         # Finally Load it into the csv file
         writer.writerow({headers[0]: values_list[0], headers[1]: values_list[1],
@@ -92,7 +105,8 @@ def csv_ready(wrk_dictionary: dict):
 
 
 if __name__ == '__main__':
-    with open('wrk_sample.txt', 'r') as wrk_file:
+    file_inp = input("Please Enter the WRK Output file:")
+    with open(os.path.join(base_path, file_inp), 'r') as wrk_file:
         list_txt = wrk_file.read()
     print(str(list_txt))
     reading_1, reading_2, reading_3, reading_4 = 0, 0, 0, 0
