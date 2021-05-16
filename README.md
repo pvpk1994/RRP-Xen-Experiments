@@ -57,6 +57,6 @@ Steps:
  
  8. In the client machine, run ```script_http_automate.sh```, the ngrok on Vantage VM should now start serving the file-size requests. This can be confirmed by ```200 OK``` status.
  
- 9. If the status is ```500 Bad Gateway```, it implies something is wrong in the experimental setup.
+ 9. If the status is ```502 Bad Gateway```, it implies something is wrong in the experimental setup.
  
  10. On the client machine, the results are gathered in ```results``` directory. 
