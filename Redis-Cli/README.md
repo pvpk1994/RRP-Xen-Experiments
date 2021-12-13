@@ -14,7 +14,7 @@ Procedure:
 Repeat the process for following domain pairs <3/7, 4/7>, <1/14, 3/7, IDLE>, ... 
 If unschedulable using RRP-AAF, omit that pair and proceed with the next pair.
 
-==To run redis-cli process without having to know its PID to bind it to a CPU ==
+**To run redis-cli process without having to know its PID to bind it to a CPU**
 
   taskset -c CPU_ID nohup ./redis-cli --intrinsic-latency 20 2>&1 > output.txt &
 
