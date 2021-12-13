@@ -13,3 +13,9 @@ Procedure:
 6. Repeat this experiment 3 times for each domain and gather the averages of these 3 runs.
 Repeat the process for following domain pairs <3/7, 4/7>, <1/14, 3/7, IDLE>, ... 
 If unschedulable using RRP-AAF, omit that pair and proceed with the next pair.
+
+<mark> To run redis-cli process without having to know its PID to bind it to a CPU </mark>
+taskset -c CPU_ID nohup ./redis-cli --intrinsic-latency 20 2>&1 > output.txt &
+
+However, a shortcoming with the above command is that we cannot make sure if the priority of this latched process is #1 or not. 
+We need chrt for that which takes <PID> as its argument. 
